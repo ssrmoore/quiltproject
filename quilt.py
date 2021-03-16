@@ -3,11 +3,7 @@
 from turtle import * #this seems like it must do something important
 import random
 
-purple = '#8E44AD'
-gold = '#F4D03F'
-black = '#0C0B0B'
-lightpurple = '#C089D3'
-
+#all the HTML colors for the blue quilt
 aquamarine = '#51D3F7'
 darkblue = '#2D40A2'
 tan = '#DDBA7C'
@@ -36,6 +32,7 @@ def drawRectangle(size, color):
     assuming turtle is initially at one of its endpoints"""
     pd()
     pen(fillcolor = color)
+    pencolor(color)
     begin_fill()
     fd(size)
     lt(90)
@@ -49,36 +46,27 @@ def drawRectangle(size, color):
     pu()
 
 def testDrawQuilt(size):
-    """Initializes turtle, and then calls drawRectangle multiple times in different places"""
-    # initialize turtle
+    """Initializes turtle, and then calls drawRectangle multiple times in different places and colors"""
     initializeTurtle(size)
     for _ in range(20):
-        z = random.randint(1, 3)
-        x = random.randint(1, 6)
-        if x % 6 == 0:
+        z = random.randint(2, 4)
+        x = random.randint(1, 5)
+        if x % 5 == 0:
             drawRectangle(size/z, aquamarine)
-        elif x % 6 == 1:
+        elif x % 5 == 1:
             drawRectangle(size/z, darkblue)
-        elif x % 6 == 2:
+        elif x % 5 == 2:
             drawRectangle(size/z, tan)
-        elif x % 6 == 3:
+        elif x % 5 == 3:
             drawRectangle(size/z, teal)
-        elif x % 6 == 4:
+        elif x % 5 == 4:
             drawRectangle(size/z, darkgreen)
-        elif x % 6 == 5:
-            drawRectangle(size/z, navy)
         y = random.randint(1,size)
         fd(y/6)
         if y % 2 == 0:
             lt(90)
             w = random.randint(1,size)
             fd(w/6)
-
-    # save the figure
-    #getscreen().getcanvas().postscript(file="drawQuilt({},{}).eps".format(size))
-
-#also pick a better color palette, maybe by pulling from quilt if we were fancy
-#how to solve the running off screen problem?
 
 
 if __name__=='__main__':
