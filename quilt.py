@@ -1,5 +1,3 @@
-print ("hello world")
-
 #lets experiment with turtle to draw the quilt, since we are familiar with it
 
 from turtle import * #this seems like it must do something important
@@ -17,7 +15,7 @@ def initializeTurtle(size):
     reset() # Clear any existing turtle drawings
             # and reset turtle position & heading.
     pensize(1) # Choose a pen thickness
-    speed(0) # Set the speed; 0=fastest, 1=slowest, 6=normal
+    speed(3) # Set the speed; 0=fastest, 1=slowest, 6=normal
     # By default turtle starts at (0,0): center of the screen
     # and by default faces east
     # Put turtle in bottom left corner of the quilt
@@ -26,24 +24,29 @@ def initializeTurtle(size):
     sety(-size/2)
     pd()
 
-def drawSquare(size, color):
+def drawRectangle(size, color):
     """Draws a single square of side length size and given color
     assuming turtle is initially at one of its endpoints"""
     pd()
     pen(fillcolor = color)
     begin_fill()
-    for _ in range(4):
-        fd(size)
-        lt(90)
+    fd(size)
+    lt(90)
+    fd(size/2)
+    lt(90)
+    fd(size)
+    lt(90)
+    fd(size/2)
+    lt(90)
     end_fill()
     pu()
 
 def testDrawQuilt(size, color1 = purple):
-    """Initializes turtle, calls drawQuilt and saves figure"""
+    """Initializes turtle, calls drawSquare"""
     # initialize turtle
     initializeTurtle(size)
     # call drawQuilt
-    drawSquare(size, color1)
+    drawRectangle(size, color1)
     # save the figure
     #getscreen().getcanvas().postscript(file="drawQuilt({},{}).eps".format(size))
 
