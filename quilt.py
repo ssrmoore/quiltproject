@@ -1,6 +1,4 @@
-#lets experiment with turtle to draw the quilt, since we are familiar with it
-
-from turtle import * #this seems like it must do something important
+from turtle import *
 import random
 
 #all the HTML colors for the blue quilt
@@ -13,8 +11,7 @@ navy = '#1F2B41'
 
 def initializeTurtle(size):
     """Sets up the window and initializes the turtle
-    to be at the bottom left corner of the pattern
-    facing east (which is the default direction)."""
+    to be at the center of the screen."""
     padding = 25  # increase if patterns gets cut off
     # Create a turtle window
     setup(width = size + padding, height = size + padding)
@@ -26,9 +23,8 @@ def initializeTurtle(size):
     # By default turtle starts at (0,0): center of the screen
     # and by default faces east
 
-
 def drawRectangle(size, color):
-    """Draws a single square of side length size and given color
+    """Draws a single rectangle of side length size and given color
     assuming turtle is initially at one of its endpoints"""
     pd()
     pen(fillcolor = color)
@@ -45,22 +41,22 @@ def drawRectangle(size, color):
     end_fill()
     pu()
 
-def testDrawQuilt(size):
+def testDrawQuilt(size, color1, color2, color3, color4, color5):
     """Initializes turtle, and then calls drawRectangle multiple times in different places and colors"""
     initializeTurtle(size)
-    for _ in range(20):
+    for _ in range(30):
         z = random.randint(2, 4)
         x = random.randint(1, 5)
         if x % 5 == 0:
-            drawRectangle(size/z, aquamarine)
+            drawRectangle(size/z, color1)
         elif x % 5 == 1:
-            drawRectangle(size/z, darkblue)
+            drawRectangle(size/z, color2)
         elif x % 5 == 2:
-            drawRectangle(size/z, tan)
+            drawRectangle(size/z, color3)
         elif x % 5 == 3:
-            drawRectangle(size/z, teal)
+            drawRectangle(size/z, color4)
         elif x % 5 == 4:
-            drawRectangle(size/z, darkgreen)
+            drawRectangle(size/z, color5)
         y = random.randint(1,size)
         fd(y/6)
         if y % 2 == 0:
@@ -68,9 +64,8 @@ def testDrawQuilt(size):
             w = random.randint(1,size)
             fd(w/6)
 
-
 if __name__=='__main__':
     """Testing code"""
 
-    testDrawQuilt(800)
+    testDrawQuilt(800, teal, aquamarine, darkblue, tan, darkgreen)
     exitonclick()
