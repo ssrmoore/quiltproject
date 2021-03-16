@@ -22,6 +22,9 @@ def initializeTurtle(size):
     speed(0) # Set the speed; 0=fastest, 1=slowest, 6=normal
     # By default turtle starts at (0,0): center of the screen
     # and by default faces east
+    rt(90)
+    fd(size/2)
+    lt(90)
 
 def drawRectangle(size, color):
     """Draws a single rectangle of side length size and given color
@@ -58,11 +61,12 @@ def testDrawQuilt(size, color1, color2, color3, color4, color5):
         elif x % 5 == 4:
             drawRectangle(size/z, color5)
         y = random.randint(1,size)
-        fd(y/6)
+        fd(y/4)
         if y % 2 == 0:
             lt(90)
             w = random.randint(1,size)
-            fd(w/6)
+            fd(w/4)
+#its frustrating to me that the rectangles tend to concentrate in a half/quadrant
 
 if __name__=='__main__':
     """Testing code"""
