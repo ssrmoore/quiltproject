@@ -41,12 +41,19 @@ def drawRectangle(size, color):
     end_fill()
     pu()
 
-def testDrawQuilt(size, color1 = purple):
+def testDrawQuilt(size, color1 = purple, color2=gold):
     """Initializes turtle, calls drawSquare"""
     # initialize turtle
     initializeTurtle(size)
     # call drawQuilt
     drawRectangle(size, color1)
+    fd(size)
+    lt(90)
+    fd(size/2)
+    lt(90)
+    fd(size)
+    lt(180)
+    drawRectangle(size,color2)
     # save the figure
     #getscreen().getcanvas().postscript(file="drawQuilt({},{}).eps".format(size))
 
