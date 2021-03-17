@@ -10,6 +10,7 @@ tan = '#DDBA7C'
 teal = '#0588AE'
 darkgreen = '#1D402F'
 navy = '#1F2B41'
+bluesquilt_list = [navy, aquamarine, darkblue, teal, darkgreen]
 
 #all the HTML colors for the red/grey blocks and strips quilt
 red = '#C8361E'
@@ -18,6 +19,7 @@ lightgrey = '#CFC3AD'
 grey = '#757266'
 darkgrey = '#363435'
 black = '#1D1D1F'
+redgreyquilt_list = [black, red, brown, lightgrey, grey, darkgrey]
 
 #all the HTML colors for the SandyHillLazyGal quilt
 orange = '#D67646'
@@ -30,6 +32,7 @@ snow = '#CEBD9F'
 newblue = '#353B51'
 darkteal = '#285B60'
 lipstick = '#BD213A'
+sandyhilllazygalquilt_list = [orange, yellow, purple, newblack, newbrown, grass, snow, newblue, darkteal]
 
 def initializeTurtle(size, color):
     """Sets up the window and initializes the turtle
@@ -42,11 +45,9 @@ def initializeTurtle(size, color):
             # and reset turtle position & heading.
     pensize(0) # Choose a pen thickness
     speed(0) # Set the speed; 0=fastest, 1=slowest, 6=normal
+    pu()
     # By default turtle starts at (0,0): center of the screen
     # and by default faces east
-    rt(90)
-    fd(size/2)
-    lt(90)
 
 def drawRectangle(size, color):
     """Draws a single rectangle of side length size and given color
@@ -67,8 +68,9 @@ def drawRectangle(size, color):
     pu()
 
 def drawSkinnyColumn(size, color1, color2):
-    """Draws a single rectangle of side length size and given color
-    assuming turtle is initially at one of its endpoints"""
+    """Draws a skinny rectangle a fraction of the height
+    and then another skinny rectangle on top of it to complete the column"""
+    #seems like there's probably a cleaner way to do this
     pd()
     pen(fillcolor = color1)
     pencolor(color1)
@@ -103,26 +105,14 @@ def drawSkinnyColumn(size, color1, color2):
     fd(size/s)
     lt(90)
     fd(size/16)
-
-
     pu()
 
-def testDrawQuilt(size, color1, color2, color3, color4, color5, color6):
+def testDrawQuilt(size, colorlist):
     """Initializes turtle, and then calls drawRectangle multiple times in different places and colors"""
-    initializeTurtle(size, color6)
+    initializeTurtle(size, colorlist[0])
     for _ in range(30):
         z = random.randint(2, 4)
-        x = random.randint(1, 5)
-        if x % 5 == 0:
-            drawRectangle(size/z, color1)
-        elif x % 5 == 1:
-            drawRectangle(size/z, color2)
-        elif x % 5 == 2:
-            drawRectangle(size/z, color3)
-        elif x % 5 == 3:
-            drawRectangle(size/z, color4)
-        elif x % 5 == 4:
-            drawRectangle(size/z, color5)
+        drawRectangle(size/z, random.choice(colorlist))
         y = random.randint(1,size)
         fd(y/4)
         if y % 2 == 0:
@@ -130,34 +120,26 @@ def testDrawQuilt(size, color1, color2, color3, color4, color5, color6):
             w = random.randint(1,size)
             fd(w/4)
 
-def SandyHillQuilt(size, color1, color2, color3, color4, color5, color6, color7, color8, color9, color10):
-#should probably make it so a list just feeds into this instead
-    initializeTurtle(size, color1)
-    lt(180)
-    fd(size/2)
-    lt(180)
-    #how to have it randomly choose colors?
-    colors_list = [color2, color3, color4, color5, color6, color7, color8, color9, color10]
-    for i in range(5):
-        if i % 2 == 0:
-            drawSkinnyColumn(size, random.choice(colors_list), random.choice(colors_list))
-        else:
-            drawSkinnyColumn(size, random.choice(colors_list), random.choice(colors_list))
-    fd(size/4)
-    for i in range(7):
-        if i % 2 == 0:
-            drawSkinnyColumn(size, random.choice(colors_list), random.choice(colors_list))
-        else:
-            drawSkinnyColumn(size, random.choice(colors_list), random.choice(colors_list))
-
 #its frustrating to me that the rectangles tend to concentrate in a half/quadrant
 #technically speaking, they shouldn't overlay but fit together
 
-if __name__=='__main__':
-    """Testing code"""
+def SandyHillQuilt(size, backgroundcolor, colorlist):
+    initializeTurtle(size, backgroundcolor)
+    bk(size/2)
+    rt(90)
+    fd(size/2)
+    lt(90)
+    for i in range(5):
+        drawSkinnyColumn(size, random.choice(colorlist), random.choice(colorlist))
+    fd(size/4) #this is where the middle squares should go
+    for i in range(7):
+        drawSkinnyColumn(size, random.choice(colorlist), random.choice(colorlist))
 
-    #testDrawQuilt(800, teal, aquamarine, darkblue, tan, darkgreen, navy) #blue quilt
-    #testDrawQuilt(800, red, lightgrey, grey, darkgrey, brown, black) #red/grey quilt
+if __name__=='__main__':
+    """Testing code- uncomment whichever quilt you want to generate"""
+
+    #testDrawQuilt(800, bluesquilt_list) #blue quilt
+    #testDrawQuilt(800, redgreyquilt_list) #red/grey quilt
     #I want this quilt to split in half and draw twice but I'm struggling to make that happen
-    SandyHillQuilt(800, lipstick, orange, yellow, purple, newbrown, grass, newblack, snow, newblue, darkteal)
+    #SandyHillQuilt(800, lipstick, sandyhilllazygalquilt_list)
     exitonclick()
