@@ -19,6 +19,18 @@ grey = '#757266'
 darkgrey = '#363435'
 black = '#1D1D1F'
 
+#all the HTML colors for the SandyHillLazyGal quilt
+orange = '#D67646'
+yellow = '#CD8B33'
+purple = '#5E4968'
+newblack = '#383836'
+newbrown = '#9B5C3A'
+grass = '#98AA59'
+snow = '#CEBD9F'
+newblue = '#353B51'
+darkteal = '#285B60'
+lipstick = '#BD213A'
+
 def initializeTurtle(size, color):
     """Sets up the window and initializes the turtle
     to be at the center of the screen."""
@@ -124,5 +136,5 @@ if __name__=='__main__':
     #testDrawQuilt(800, teal, aquamarine, darkblue, tan, darkgreen, navy) #blue quilt
     #testDrawQuilt(800, red, lightgrey, grey, darkgrey, brown, black) #red/grey quilt
     #I want this quilt to split in half and draw twice but I'm struggling to make that happen
-    SandyHillQuilt(800, lightgrey, navy, aquamarine)
+    SandyHillQuilt(800, orange, yellow, purple)
     exitonclick()
