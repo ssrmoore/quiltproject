@@ -132,6 +132,9 @@ def SandyHillQuilt(size, backgroundcolor, colorlist):
     for i in range(5):
         drawSkinnyColumn(size, random.choice(colorlist), random.choice(colorlist))
     fd(size/4) #this is where the middle squares should go
+    #short horizontal stripes
+    #short vertical stripes
+    #quarter size version of both
     for i in range(7):
         drawSkinnyColumn(size, random.choice(colorlist), random.choice(colorlist))
 
