@@ -9,13 +9,21 @@ teal = '#0588AE'
 darkgreen = '#1D402F'
 navy = '#1F2B41'
 
-def initializeTurtle(size):
+#all the HTML colors for the red/grey blocks and strips quilt
+red = '#C8361E'
+brown = '#563226'
+lightgrey = '#CFC3AD'
+grey = '#757266'
+darkgrey = '#363435'
+black = '#1D1D1F'
+
+def initializeTurtle(size, color):
     """Sets up the window and initializes the turtle
     to be at the center of the screen."""
     padding = 25  # increase if patterns gets cut off
     # Create a turtle window
     setup(width = size + padding, height = size + padding)
-    bgcolor(navy)
+    bgcolor(color)
     reset() # Clear any existing turtle drawings
             # and reset turtle position & heading.
     pensize(0) # Choose a pen thickness
@@ -44,9 +52,9 @@ def drawRectangle(size, color):
     end_fill()
     pu()
 
-def testDrawQuilt(size, color1, color2, color3, color4, color5):
+def testDrawQuilt(size, color1, color2, color3, color4, color5, color6):
     """Initializes turtle, and then calls drawRectangle multiple times in different places and colors"""
-    initializeTurtle(size)
+    initializeTurtle(size, color6)
     for _ in range(30):
         z = random.randint(2, 4)
         x = random.randint(1, 5)
@@ -66,10 +74,15 @@ def testDrawQuilt(size, color1, color2, color3, color4, color5):
             lt(90)
             w = random.randint(1,size)
             fd(w/4)
+
 #its frustrating to me that the rectangles tend to concentrate in a half/quadrant
+#technically speaking, they shouldn't overlay but fit together
 
 if __name__=='__main__':
     """Testing code"""
 
-    testDrawQuilt(800, teal, aquamarine, darkblue, tan, darkgreen)
+    testDrawQuilt(800, teal, aquamarine, darkblue, tan, darkgreen, navy) #blue quilt
+    #testDrawQuilt(800, red, lightgrey, grey, darkgrey, brown, black) #red/grey quilt
+    #I want this quilt to split in half and draw twice but I'm struggling to make that happen
+
     exitonclick()
