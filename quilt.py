@@ -66,13 +66,12 @@ def drawRectangle(size, color):
     end_fill()
     pu()
 
-def drawSkinnyRectangle(size, color):
+def drawSkinnyColumn(size, color1, color2):
     """Draws a single rectangle of side length size and given color
     assuming turtle is initially at one of its endpoints"""
-    #christ if this works its gotta be simplified
     pd()
-    pen(fillcolor = color)
-    pencolor(color)
+    pen(fillcolor = color1)
+    pencolor(color1)
     s = random.uniform(1,3)
     begin_fill()
     fd(size/16)
@@ -85,6 +84,27 @@ def drawSkinnyRectangle(size, color):
     lt(90)
     end_fill()
     fd(size/16)
+    lt(90)
+    fd(size/s)
+    lt(90)
+    fd(size/16)
+    rt(180)
+    pen(fillcolor = color2)
+    pencolor(color2)
+    begin_fill()
+    fd(size/16)
+    lt(90)
+    fd(size-size/s)
+    lt(90)
+    fd(size/16)
+    lt(90)
+    fd(size-size/s)
+    end_fill()
+    fd(size/s)
+    lt(90)
+    fd(size/16)
+
+
     pu()
 
 def testDrawQuilt(size, color1, color2, color3, color4, color5, color6):
@@ -110,22 +130,25 @@ def testDrawQuilt(size, color1, color2, color3, color4, color5, color6):
             w = random.randint(1,size)
             fd(w/4)
 
-def SandyHillQuilt(size, color1, color2, color3):
-    initializeTurtle(size, color3)
+def SandyHillQuilt(size, color1, color2, color3, color4, color5, color6, color7, color8, color9, color10):
+#should probably make it so a list just feeds into this instead
+    initializeTurtle(size, color1)
     lt(180)
     fd(size/2)
     lt(180)
+    #how to have it randomly choose colors?
+    colors_list = [color2, color3, color4, color5, color6, color7, color8, color9, color10]
     for i in range(5):
         if i % 2 == 0:
-            drawSkinnyRectangle(size, color1)
+            drawSkinnyColumn(size, random.choice(colors_list), random.choice(colors_list))
         else:
-            drawSkinnyRectangle(size, color2)
+            drawSkinnyColumn(size, random.choice(colors_list), random.choice(colors_list))
     fd(size/4)
     for i in range(7):
         if i % 2 == 0:
-            drawSkinnyRectangle(size, color1)
+            drawSkinnyColumn(size, random.choice(colors_list), random.choice(colors_list))
         else:
-            drawSkinnyRectangle(size, color2)
+            drawSkinnyColumn(size, random.choice(colors_list), random.choice(colors_list))
 
 #its frustrating to me that the rectangles tend to concentrate in a half/quadrant
 #technically speaking, they shouldn't overlay but fit together
@@ -136,5 +159,5 @@ if __name__=='__main__':
     #testDrawQuilt(800, teal, aquamarine, darkblue, tan, darkgreen, navy) #blue quilt
     #testDrawQuilt(800, red, lightgrey, grey, darkgrey, brown, black) #red/grey quilt
     #I want this quilt to split in half and draw twice but I'm struggling to make that happen
-    SandyHillQuilt(800, orange, yellow, purple)
+    SandyHillQuilt(800, lipstick, orange, yellow, purple, newbrown, grass, newblack, snow, newblue, darkteal)
     exitonclick()
