@@ -1,6 +1,8 @@
 from turtle import *
 import random
 
+#ask about self plagiarism
+
 #all the HTML colors for the blue quilt
 aquamarine = '#51D3F7'
 darkblue = '#2D40A2'
@@ -52,6 +54,27 @@ def drawRectangle(size, color):
     end_fill()
     pu()
 
+def drawSkinnyRectangle(size, color):
+    """Draws a single rectangle of side length size and given color
+    assuming turtle is initially at one of its endpoints"""
+    #christ if this works its gotta be simplified
+    pd()
+    pen(fillcolor = color)
+    pencolor(color)
+    s = random.uniform(1,3)
+    begin_fill()
+    fd(size/16)
+    lt(90)
+    fd(size/s)
+    lt(90)
+    fd(size/16)
+    lt(90)
+    fd(size/s)
+    lt(90)
+    end_fill()
+    fd(size/16)
+    pu()
+
 def testDrawQuilt(size, color1, color2, color3, color4, color5, color6):
     """Initializes turtle, and then calls drawRectangle multiple times in different places and colors"""
     initializeTurtle(size, color6)
@@ -75,14 +98,31 @@ def testDrawQuilt(size, color1, color2, color3, color4, color5, color6):
             w = random.randint(1,size)
             fd(w/4)
 
+def SandyHillQuilt(size, color1, color2, color3):
+    initializeTurtle(size, color3)
+    lt(180)
+    fd(size/2)
+    lt(180)
+    for i in range(5):
+        if i % 2 == 0:
+            drawSkinnyRectangle(size, color1)
+        else:
+            drawSkinnyRectangle(size, color2)
+    fd(size/4)
+    for i in range(7):
+        if i % 2 == 0:
+            drawSkinnyRectangle(size, color1)
+        else:
+            drawSkinnyRectangle(size, color2)
+
 #its frustrating to me that the rectangles tend to concentrate in a half/quadrant
 #technically speaking, they shouldn't overlay but fit together
 
 if __name__=='__main__':
     """Testing code"""
 
-    testDrawQuilt(800, teal, aquamarine, darkblue, tan, darkgreen, navy) #blue quilt
+    #testDrawQuilt(800, teal, aquamarine, darkblue, tan, darkgreen, navy) #blue quilt
     #testDrawQuilt(800, red, lightgrey, grey, darkgrey, brown, black) #red/grey quilt
     #I want this quilt to split in half and draw twice but I'm struggling to make that happen
-
+    SandyHillQuilt(800, lightgrey, navy, aquamarine)
     exitonclick()
