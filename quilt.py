@@ -10,7 +10,7 @@ tan = '#DDBA7C'
 teal = '#0588AE'
 darkgreen = '#1D402F'
 navy = '#1F2B41'
-bluesquilt_list = [navy, aquamarine, darkblue, teal, darkgreen]
+bluesquilt_list = [navy, aquamarine, darkblue, teal, darkgreen, tan]
 
 #all the HTML colors for the red/grey blocks and strips quilt
 red = '#C8361E'
@@ -44,14 +44,13 @@ def initializeTurtle(size, color):
     reset() # Clear any existing turtle drawings
             # and reset turtle position & heading.
     pensize(0) # Choose a pen thickness
-    speed(0) # Set the speed; 0=fastest, 1=slowest, 6=normal
+    speed(6) # Set the speed; 0=fastest, 1=slowest, 6=normal
     pu()
     # By default turtle starts at (0,0): center of the screen
     # and by default faces east
 
 def drawRectangle(size, color):
-    """Draws a single rectangle of side length size and given color
-    assuming turtle is initially at one of its endpoints"""
+    """Draws a single rectangle of side length size and given color"""
     pd()
     pen(fillcolor = color)
     pencolor(color)
@@ -67,9 +66,31 @@ def drawRectangle(size, color):
     end_fill()
     pu()
 
+def drawRectangle2(size, color):
+    """Draws a single rectangle of side length size and given color
+    assuming turtle is initially at one of its endpoints and the rectangle will fit within the screen"""
+    pd()
+    pen(fillcolor = color)
+    pencolor(color)
+    begin_fill()
+    fd(size)
+    if -400 <= xcor() <= 400 and -400 <= ycor() <= 400:
+        lt(90)
+        fd(size/2)
+    if -400 <= xcor() <= 400 and -400 <= ycor() <= 400:
+        lt(90)
+        fd(size)
+    if -400 <= xcor() <= 400 and -400 <= ycor() <= 400:
+        lt(90)
+        fd(size/2)
+    lt(90)
+    end_fill()
+    pu()
+#I have no idea why the hell this sometimes draws a triangle and having the pen not be clear is a problem
+
 def drawSkinnyColumn(size, height, color1, color2):
     """Draws a skinny rectangle a fraction of the height
-    and then another skinny rectangle on top of it to complete the column"""
+    and then another skinny rectangle on top of it to complete the column for sandyhilllazygal"""
     #seems like there's probably a cleaner way to do this
     pd()
     pen(fillcolor = color1)
@@ -108,6 +129,8 @@ def drawSkinnyColumn(size, height, color1, color2):
     pu()
 
 def drawMiniRows(size, color1, color2):
+    """Draws a skinny rectangle a fraction of the quarter width
+    and then another skinny rectangle beside it to complete the quarter row for sandyhilllazygal"""
     pd()
     pen(fillcolor = color1)
     pencolor(color1)
@@ -143,8 +166,7 @@ def drawMiniRows(size, color1, color2):
     lt(180)
     pu()
 
-
-def testDrawQuilt(size, colorlist):
+def testDrawQuilt(size, colorlist): #should probably delete this one but keeping for now just in case
     """Initializes turtle, and then calls drawRectangle multiple times in different places and colors"""
     initializeTurtle(size, colorlist[0])
     for _ in range(30):
@@ -157,10 +179,19 @@ def testDrawQuilt(size, colorlist):
             w = random.randint(1,size)
             fd(w/4)
 
-#its frustrating to me that the rectangles tend to concentrate in a half/quadrant
-#technically speaking, they shouldn't overlay but fit together
+def testDrawQuilt2(size, colorlist): #this moves them around a bit more randomly than the OG
+    """Initializes turtle, and then calls drawRectangle multiple times in different places and colors a bit more randomly"""
+    initializeTurtle(size, colorlist[0])
+    for _ in range(20):
+        z = random.randint(2, 4)
+        drawRectangle(size/z, random.choice(colorlist))
+        setx(random.randint(-400,400))
+        sety(random.randint(-400,400))
+        if xcor() % 2 == 0: #so that they'll randomly draw upwards sometimes
+            lt(90)
 
 def SandyHillQuilt(size, backgroundcolor, colorlist):
+    """Draws the SandyHillQuilt, since that once proceeds very differently from the other two"""
     initializeTurtle(size, backgroundcolor)
     bk(size/2)
     rt(90)
@@ -191,8 +222,11 @@ def SandyHillQuilt(size, backgroundcolor, colorlist):
 if __name__=='__main__':
     """Testing code- uncomment whichever quilt you want to generate"""
 
-    #testDrawQuilt(800, bluesquilt_list) #blue quilt
-    #testDrawQuilt(800, redgreyquilt_list) #red/grey quilt
-    #I want this quilt to split in half and draw twice but I'm struggling to make that happen
-    SandyHillQuilt(800, lipstick, sandyhilllazygalquilt_list)
+    #testDrawQuilt2(800, bluesquilt_list) #blue quilt
+    #testDrawQuilt2(800, redgreyquilt_list) #red/grey quilt
+    #SandyHillQuilt(800, lipstick, sandyhilllazygalquilt_list) #sandhilllazygal quilt
+    #I want the red/grey quilt to split in half and draw twice but I'm struggling to make that happen
+    #setting a boundary turtle can't cross seems like the next step
+    #the whole setx/sety deal may be easier than my moving it around by random amounts thing
+    #technically speaking, they shouldn't overlay but fit together <- no idea how to tackle that
     exitonclick()
