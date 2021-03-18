@@ -44,7 +44,7 @@ def initializeTurtle(size, color):
     reset() # Clear any existing turtle drawings
             # and reset turtle position & heading.
     pensize(0) # Choose a pen thickness
-    speed(6) # Set the speed; 0=fastest, 1=slowest, 6=normal
+    speed(0) # Set the speed; 0=fastest, 1=slowest, 6=normal
     pu()
     # By default turtle starts at (0,0): center of the screen
     # and by default faces east
@@ -179,10 +179,14 @@ def testDrawQuilt(size, colorlist): #should probably delete this one but keeping
             w = random.randint(1,size)
             fd(w/4)
 
+#def recursiveHelper(size, colorlist):
+#if size <= 200:
+
+
 def testDrawQuilt2(size, colorlist): #this moves them around a bit more randomly than the OG
     """Initializes turtle, and then calls drawRectangle multiple times in different places and colors a bit more randomly"""
     initializeTurtle(size, colorlist[0])
-    for _ in range(20):
+    for _ in range(30):
         z = random.randint(2, 4)
         drawRectangle(size/z, random.choice(colorlist))
         setx(random.randint(-400,400))
@@ -219,14 +223,17 @@ def SandyHillQuilt(size, backgroundcolor, colorlist):
     for i in range(7): #last 7 columns
         drawSkinnyColumn(size, size, random.choice(colorlist), random.choice(colorlist))
 
+
+
 if __name__=='__main__':
     """Testing code- uncomment whichever quilt you want to generate"""
 
     #testDrawQuilt2(800, bluesquilt_list) #blue quilt
     #testDrawQuilt2(800, redgreyquilt_list) #red/grey quilt
-    #SandyHillQuilt(800, lipstick, sandyhilllazygalquilt_list) #sandhilllazygal quilt
+    SandyHillQuilt(800, lipstick, sandyhilllazygalquilt_list) #sandhilllazygal quilt
     #I want the red/grey quilt to split in half and draw twice but I'm struggling to make that happen
     #setting a boundary turtle can't cross seems like the next step
     #the whole setx/sety deal may be easier than my moving it around by random amounts thing
+    #using recursion
     #technically speaking, they shouldn't overlay but fit together <- no idea how to tackle that
     exitonclick()
