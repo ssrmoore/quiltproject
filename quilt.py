@@ -67,7 +67,7 @@ def drawRectangle(size, color):
     end_fill()
     pu()
 
-def drawSkinnyColumn(size, color1, color2):
+def drawSkinnyColumn(size, height, color1, color2):
     """Draws a skinny rectangle a fraction of the height
     and then another skinny rectangle on top of it to complete the column"""
     #seems like there's probably a cleaner way to do this
@@ -78,16 +78,16 @@ def drawSkinnyColumn(size, color1, color2):
     begin_fill()
     fd(size/16)
     lt(90)
-    fd(size/s)
+    fd(height/s)
     lt(90)
     fd(size/16)
     lt(90)
-    fd(size/s)
+    fd(height/s)
     lt(90)
     end_fill()
     fd(size/16)
     lt(90)
-    fd(size/s)
+    fd(height/s)
     lt(90)
     fd(size/16)
     rt(180)
@@ -96,16 +96,53 @@ def drawSkinnyColumn(size, color1, color2):
     begin_fill()
     fd(size/16)
     lt(90)
-    fd(size-size/s)
+    fd(height-height/s)
     lt(90)
     fd(size/16)
     lt(90)
-    fd(size-size/s)
+    fd(height-height/s)
     end_fill()
-    fd(size/s)
+    fd(height/s)
     lt(90)
     fd(size/16)
     pu()
+
+def drawMiniRows(size, color1, color2):
+    pd()
+    pen(fillcolor = color1)
+    pencolor(color1)
+    s = random.uniform(1,1.667)
+    begin_fill()
+    fd(size/(4*s))
+    lt(90)
+    fd(size/16)
+    lt(90)
+    fd(size/(4*s))
+    lt(90)
+    fd(size/16)
+    lt(90)
+    end_fill()
+    pen(fillcolor = color2)
+    pencolor(color2)
+    fd(size/(4*s))
+    begin_fill()
+    fd(size/4-size/(4*s))
+    lt(90)
+    fd(size/16)
+    lt(90)
+    fd(size/4-size/(4*s))
+    lt(90)
+    fd(size/16)
+    lt(90)
+    end_fill()
+    fd(size/4-size/(4*s))
+    lt(90)
+    fd(size/16)
+    lt(90)
+    fd(size/4)
+    lt(180)
+    pu()
+
 
 def testDrawQuilt(size, colorlist):
     """Initializes turtle, and then calls drawRectangle multiple times in different places and colors"""
@@ -129,14 +166,27 @@ def SandyHillQuilt(size, backgroundcolor, colorlist):
     rt(90)
     fd(size/2)
     lt(90)
-    for i in range(5):
-        drawSkinnyColumn(size, random.choice(colorlist), random.choice(colorlist))
-    fd(size/4) #this is where the middle squares should go
-    #short horizontal stripes
-    #short vertical stripes
-    #quarter size version of both
-    for i in range(7):
-        drawSkinnyColumn(size, random.choice(colorlist), random.choice(colorlist))
+    for i in range(5): #first 5 columns
+        drawSkinnyColumn(size, size, random.choice(colorlist), random.choice(colorlist))
+    #this is where the middle squares should go
+    for i in range(4):
+        drawMiniRows(size, random.choice(colorlist), random.choice(colorlist)) #short horizontal stripes
+    for i in range(4):
+        drawSkinnyColumn(size, size/4, random.choice(colorlist), random.choice(colorlist)) #short vertical stripes
+    lt(90) #blank space for red
+    fd(size/2)
+    lt(90)
+    fd(size/4)
+    lt(180)
+    for i in range(4):
+        drawMiniRows(size, random.choice(colorlist), random.choice(colorlist)) #short horizontal stripes
+    fd(size/4)
+    rt(90)
+    fd(size)
+    lt(90)
+    #end of middle squares
+    for i in range(7): #last 7 columns
+        drawSkinnyColumn(size, size, random.choice(colorlist), random.choice(colorlist))
 
 if __name__=='__main__':
     """Testing code- uncomment whichever quilt you want to generate"""
@@ -144,5 +194,5 @@ if __name__=='__main__':
     #testDrawQuilt(800, bluesquilt_list) #blue quilt
     #testDrawQuilt(800, redgreyquilt_list) #red/grey quilt
     #I want this quilt to split in half and draw twice but I'm struggling to make that happen
-    #SandyHillQuilt(800, lipstick, sandyhilllazygalquilt_list)
+    SandyHillQuilt(800, lipstick, sandyhilllazygalquilt_list)
     exitonclick()
