@@ -68,83 +68,29 @@ def drawNewRectangle(length, height, color):
 
 #sandy hill quilt stuff
 def drawSkinnyColumn(size, height, color1, color2):
-#these should both probably be able to take in the rectangle function tbh
-#yeah, im pretty sure this can easily take in newrectangle, will fix tomorrow
     """Draws a skinny rectangle a fraction of the height
     and then another skinny rectangle on top of it to complete the column for sandyhilllazygal"""
-    #seems like there's probably a cleaner way to do this
-    pd()
-    pen(fillcolor = color1)
-    pencolor(color1)
     s = random.uniform(1,3) #chooses a value between 1 and 3 to decide what fraction of the height to make the first rectangle
-    begin_fill() #starts to draw bottom skinny rectangle of varying height
-    fd(size/16)
-    lt(90)
-    fd(height/s)
-    lt(90)
-    fd(size/16)
-    lt(90)
-    fd(height/s)
-    lt(90)
-    end_fill() #finishes drawing bottom rectangle of varying height
-    pu()
+    drawNewRectangle(size/16, height/s, color1) #makes first rectangle
     fd(size/16) #directs turtle to the upper left corner of the new rectangle, facing east
     lt(90)
     fd(height/s)
     lt(90)
     fd(size/16)
     rt(180)
-    pd()
-    pen(fillcolor = color2) #switches to new pen color
-    pencolor(color2)
-    begin_fill() #begins drawing new recangle to fill the rest of the height
-    fd(size/16)
+    drawNewRectangle(size/16, height-height/s, color2) #makes second rectangle
+    fd(size/16) #goes to bottom right corner of the column to be ready for next section
+    rt(90)
+    fd(height/s)
     lt(90)
-    fd(height-height/s)
-    lt(90)
-    fd(size/16)
-    lt(90)
-    fd(height-height/s)
-    end_fill() #finishes drawing new rectangle to fill the rest of the height
-    pu()
-    fd(height/s) #goes to bottom right corner of the column to be ready for next section
-    lt(90)
-    fd(size/16)
 
 def drawMiniRows(size, color1, color2): #or this
-#i think this should also be able to take skinny rectangle without too much trouble
     """Draws a skinny rectangle a fraction of the quarter width
     and then another skinny rectangle beside it to complete the quarter row for sandyhilllazygal"""
-    pd()
-    pen(fillcolor = color1) #chooses color for first rectangle
-    pencolor(color1)
     s = random.uniform(1,1.667) #chooses number to divide size by to determine rectangle length
-    begin_fill() #starts to draw first rectangle
-    fd(size/(4*s))
-    lt(90)
-    fd(size/16)
-    lt(90)
-    fd(size/(4*s))
-    lt(90)
-    fd(size/16)
-    lt(90)
-    end_fill()
-    pu()
-    pen(fillcolor = color2) #chooses color for the second rectangle
-    pencolor(color2)
+    drawNewRectangle(size/(4*s), size/16, color1) #draws first rectangle
     fd(size/(4*s)) #moves to start of second rectangle
-    pd()
-    begin_fill() #starts to draw second rectangle
-    fd(size/4-size/(4*s))
-    lt(90)
-    fd(size/16)
-    lt(90)
-    fd(size/4-size/(4*s))
-    lt(90)
-    fd(size/16)
-    lt(90)
-    end_fill()
-    pu()
+    drawNewRectangle(size/4-size/(4*s), size/16, color2) #draws second rectangle
     fd(size/4-size/(4*s)) #moves to top left corner of the first rectangle to prepare for next row
     lt(90)
     fd(size/16)
@@ -227,8 +173,10 @@ if __name__=='__main__':
     #drawNewRectangle(800, 20, lightgrey)
 
     #sandhilllazygal quilt
-    #SandyHillQuilt(800, lipstick, sandyhilllazygalquilt_list)
+    SandyHillQuilt(800, lipstick, sandyhilllazygalquilt_list)
 
+
+    #having sandyhillquilt not have the same colors next to itself would be cool 
     #technically speaking, they shouldn't overlay but fit together <- no idea how to tackle that
     #the only thing I can think of is cutting the quilt into artificial looking sections to minimize overlap <- could ask Chad
     exitonclick()
