@@ -19,7 +19,7 @@ lightgrey = '#CFC3AD'
 grey = '#757266'
 darkgrey = '#363435'
 black = '#1D1D1F'
-redgreyquilt_list = [black, red, brown, lightgrey, grey, darkgrey]
+redgreyquilt_list = [red, brown, lightgrey, grey, darkgrey]
 
 #all the HTML colors for the SandyHillLazyGal quilt
 orange = '#D67646'
@@ -34,10 +34,10 @@ darkteal = '#285B60'
 lipstick = '#BD213A'
 sandyhilllazygalquilt_list = [orange, yellow, purple, newblack, newbrown, grass, snow, newblue, darkteal]
 
-def initializeTurtle(long, tall, color): #don't mess with this
+def initializeTurtle(long, tall, color):
     """Sets up the window and initializes the turtle
     to be at the center of the screen."""
-    padding = 25  # increase if patterns gets cut off
+    padding = 0  # increase if patterns gets cut off
     # Create a turtle window
     setup(width = long + padding, height = tall + padding)
     bgcolor(color)
@@ -49,41 +49,7 @@ def initializeTurtle(long, tall, color): #don't mess with this
     # By default turtle starts at (0,0): center of the screen
     # and by default faces east
 
-def drawFatRectangle(size, color): #i think we can delete this
-    """Draws a single rectangle of side length size and given color"""
-    pd() #put down pen
-    pen(fillcolor = color) #chooses color to fill in shape
-    pencolor(color) #chooses color for pen itself
-    begin_fill() #tells turtle that this is the start of the shape it is going to fill in
-    fd(size) #moves forward by length size
-    lt(90) #turns left 90 degrees
-    fd(size/2) #moves forward by size/2
-    lt(90) #turns left 90 degrees
-    fd(size) #moves forward by size
-    lt(90) #turns left by 90 degrees
-    fd(size/2) #moves forward by size/2
-    lt(90) #turns left by 90 degrees to return to original position
-    end_fill() #tells turtle it is finished drawing the shape and to fill it in
-    pu() #picks up pen
-
-def drawTallRectangle(size, color): #and this
-    """Draws a single rectangle of side length size and given color"""
-    pd() #put down pen
-    pen(fillcolor = color) #chooses color to fill in shape
-    pencolor(color) #chooses color for pen itself
-    begin_fill() #tells turtle that this is the start of the shape it is going to fill in
-    fd(size/2) #moves forward by length size/2
-    lt(90) #turns left 90 degrees
-    fd(size) #moves forward by size
-    lt(90) #turns left 90 degrees
-    fd(size/2) #moves forward by size/2
-    lt(90) #turns left by 90 degrees
-    fd(size) #moves forward by size
-    lt(90) #turns left by 90 degrees to return to original position
-    end_fill() #tells turtle it is finished drawing the shape and to fill it in
-    pu() #picks up pen
-
-def drawNewRectangle(length, height, color): #pretty sure this is the one to keep
+def drawNewRectangle(length, height, color):
     """Draws a single rectangle of given dimensions and color"""
     pd() #put down pen
     pen(fillcolor = color) #chooses color to fill in shape
@@ -101,8 +67,9 @@ def drawNewRectangle(length, height, color): #pretty sure this is the one to kee
     pu() #picks up pen
 
 #sandy hill quilt stuff
-def drawSkinnyColumn(size, height, color1, color2): #or this
+def drawSkinnyColumn(size, height, color1, color2):
 #these should both probably be able to take in the rectangle function tbh
+#yeah, im pretty sure this can easily take in newrectangle, will fix tomorrow
     """Draws a skinny rectangle a fraction of the height
     and then another skinny rectangle on top of it to complete the column for sandyhilllazygal"""
     #seems like there's probably a cleaner way to do this
@@ -145,6 +112,7 @@ def drawSkinnyColumn(size, height, color1, color2): #or this
     fd(size/16)
 
 def drawMiniRows(size, color1, color2): #or this
+#i think this should also be able to take skinny rectangle without too much trouble
     """Draws a skinny rectangle a fraction of the quarter width
     and then another skinny rectangle beside it to complete the quarter row for sandyhilllazygal"""
     pd()
@@ -184,8 +152,8 @@ def drawMiniRows(size, color1, color2): #or this
     fd(size/4)
     lt(180)
 
-def SandyHillQuilt(size, backgroundcolor, colorlist): #at least this still works lol
-    """Draws the SandyHillQuilt, since that once proceeds very differently from the other two"""
+def SandyHillQuilt(size, backgroundcolor, colorlist):
+    """Draws the SandyHillQuilt, since that one proceeds very differently from the other two"""
     initializeTurtle(size, size, backgroundcolor)
     bk(size/2) #moves from center of screen to bottom left
     rt(90)
@@ -213,14 +181,14 @@ def SandyHillQuilt(size, backgroundcolor, colorlist): #at least this still works
 
 
 
-def TestingBoundaries(long, tall, lxbound, lybound, uxbound, uybound, colorlist): #this currently respects boundaries
+def DrawBoundedQuilt(long, tall, lxbound, lybound, uxbound, uybound, colorlist):
     """ This function takes in a length, width, lower bounds, upper bounds, and a color list and then
     randomly draws rectangles in a variety of sizes, orientations, and colors that respect the boundaries by first deciding
     whether to draw a tall or fat rectangle, then checking that the far corner of the rectangle would be in bounds
     before starting to draw it. if it won't be in bounds, we determine how it will go out of bounds and instead make the rectangle
     go to that bound but not past it."""
 
-    for _ in range(30): #draw 30 rectangles
+    for _ in range(20): #draw 20 rectangles
         newsize = long/random.randint(2,4) #randomly decide the fractional size of the rectangle
         if random.randint(0,100)  % 2 == 0: #randomly decide orientation -> tall boy cases
             if xcor() + newsize/2 <= uxbound and ycor() + newsize <= uybound: #fits in both dimensions
@@ -245,20 +213,22 @@ def TestingBoundaries(long, tall, lxbound, lybound, uxbound, uybound, colorlist)
 
 if __name__=='__main__':
     """Testing code- uncomment whichever quilt you want to generate"""
-    #initializeTurtle(800, 800, bluesquilt_list[0])
-    #TestingBoundaries(800, 800, -400, -400, 400, 0, bluesquilt_list)
-    #TestingBoundaries(800, 800, -400, 0, 400, 400, bluesquilt_list)
 
-    initializeTurtle(800, 800, navy)
-    TestingBoundaries(800, 800, -400, -400, 400, 400, bluesquilt_list)
+    #bluesquilt
+    #initializeTurtle(800, 800, navy)
+    #DrawBoundedQuilt(800, 800, -400, -400, 400, 400, bluesquilt_list)
 
-    #testDrawQuilt(800, bluesquilt_list) #blue quilt
-    #testDrawQuilt(800, redgreyquilt_list) #red/grey quilt
-    #SandyHillQuilt(800, lipstick, sandyhilllazygalquilt_list) #sandhilllazygal quilt
+    #redgreyquilt <-lol perhaps these should be functions but
+    #initializeTurtle(800, 800, black)
+    #DrawBoundedQuilt(800, 800, -400, -400, 400, 0, redgreyquilt_list) #draw lower half
+    #DrawBoundedQuilt(800, 800, -400, 0, 400, 400, redgreyquilt_list) #draw upper half
+    #setx(-400) #draw dividing line
+    #sety(0)
+    #drawNewRectangle(800, 20, lightgrey)
 
-    #I want the red/grey quilt to split in half and draw twice but I'm struggling to make that happen
-    #setting a boundary turtle can't cross seems like the next step
-    #the whole setx/sety deal may be easier than my moving it around by random amounts thing
-    #using recursion
+    #sandhilllazygal quilt
+    #SandyHillQuilt(800, lipstick, sandyhilllazygalquilt_list)
+
     #technically speaking, they shouldn't overlay but fit together <- no idea how to tackle that
+    #the only thing I can think of is cutting the quilt into artificial looking sections to minimize overlap <- could ask Chad
     exitonclick()
