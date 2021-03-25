@@ -128,7 +128,7 @@ def DrawBoundedQuilt(long, tall, lxbound, lybound, uxbound, uybound, colorlist):
     before starting to draw it. if it won't be in bounds, we determine how it will go out of bounds and instead make the rectangle
     go to that bound but not past it."""
 
-    for _ in range(20): #draw 20 rectangles
+    for _ in range(30): #draw 20 rectangles
         newsize = long/random.randint(2,4) #randomly decide the fractional size of the rectangle
         if random.randint(0,100)  % 2 == 0: #randomly decide orientation -> tall boy cases
             if xcor() + newsize/2 <= uxbound and ycor() + newsize <= uybound: #fits in both dimensions
