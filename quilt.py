@@ -1,8 +1,6 @@
 from turtle import *
 import random
 
-#ask about self plagiarism
-
 #all the HTML colors for the blue quilt
 aquamarine = '#51D3F7'
 darkblue = '#2D40A2'
@@ -37,17 +35,13 @@ sandyhilllazygalquilt_list = [orange, yellow, purple, newblack, newbrown, grass,
 def initializeTurtle(long, tall, color):
     """Sets up the window and initializes the turtle
     to be at the center of the screen."""
-    padding = 0  # increase if patterns gets cut off
-    # Create a turtle window
-    setup(width = long + padding, height = tall + padding)
+    setup(width = long, height = tall)
     bgcolor(color)
-    reset() # Clear any existing turtle drawings
-            # and reset turtle position & heading.
-    pensize(0) # Choose a pen thickness
-    speed(0) # Set the speed; 0=fastest, 1=slowest, 6=normal
+    reset() # Clear any existing drawing or positioning
+    pensize(0) # pen thickness
+    speed(0) # speed: 1=slowest, 6=normal, 0=fastest
     pu()
-    # By default turtle starts at (0,0): center of the screen
-    # and by default faces east
+    # By default turtle starts at (0,0): center of the screen, facing east
 
 def drawNewRectangle(length, height, color):
     """Draws a single rectangle of given dimensions and color"""
@@ -84,7 +78,7 @@ def drawSkinnyColumn(size, height, color1, color2):
     fd(height/s)
     lt(90)
 
-def drawMiniRows(size, color1, color2): #or this
+def drawMiniRows(size, color1, color2):
     """Draws a skinny rectangle a fraction of the quarter width
     and then another skinny rectangle beside it to complete the quarter row for sandyhilllazygal"""
     s = random.uniform(1,1.667) #chooses number to divide size by to determine rectangle length
@@ -161,22 +155,18 @@ if __name__=='__main__':
     """Testing code- uncomment whichever quilt you want to generate"""
 
     #bluesquilt
-    #initializeTurtle(800, 800, navy)
-    #DrawBoundedQuilt(800, 800, -400, -400, 400, 400, bluesquilt_list)
+    #initializeTurtle(310, 425, navy)
+    #DrawBoundedQuilt(310, 425, -155, -212, 155, 212, bluesquilt_list)
 
-    #redgreyquilt <-lol perhaps these should be functions but
-    #initializeTurtle(800, 800, black)
-    #DrawBoundedQuilt(800, 800, -400, -400, 400, 0, redgreyquilt_list) #draw lower half
-    #DrawBoundedQuilt(800, 800, -400, 0, 400, 400, redgreyquilt_list) #draw upper half
-    #setx(-400) #draw dividing line
+    #redgreyquilt
+    #initializeTurtle(670, 840, black)
+    #DrawBoundedQuilt(670, 840, -335, -420, 335, 0, redgreyquilt_list) #draw lower half
+    #DrawBoundedQuilt(670, 840, -335, 0, 335, 420, redgreyquilt_list) #draw upper half
+    #setx(-420) #draw dividing line
     #sety(0)
-    #drawNewRectangle(800, 20, lightgrey)
+    #drawNewRectangle(840, 20, lightgrey)
 
     #sandhilllazygal quilt
-    SandyHillQuilt(800, lipstick, sandyhilllazygalquilt_list)
+    #SandyHillQuilt(800, lipstick, sandyhilllazygalquilt_list)
 
-
-    #having sandyhillquilt not have the same colors next to itself would be cool 
-    #technically speaking, they shouldn't overlay but fit together <- no idea how to tackle that
-    #the only thing I can think of is cutting the quilt into artificial looking sections to minimize overlap <- could ask Chad
-    exitonclick()
+    exitonclick() #comment this out if you want quilt to close automatically
