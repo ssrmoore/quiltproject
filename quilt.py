@@ -155,8 +155,8 @@ if __name__=='__main__':
     """Testing code- uncomment whichever quilt you want to generate"""
 
     #bluesquilt
-    #initializeTurtle(310, 425, navy)
-    #DrawBoundedQuilt(310, 425, -155, -212, 155, 212, bluesquilt_list)
+    initializeTurtle(310, 425, navy)
+    DrawBoundedQuilt(310, 425, -155, -212, 155, 212, bluesquilt_list)
 
     #redgreyquilt
     #initializeTurtle(670, 840, black)
@@ -169,4 +169,5 @@ if __name__=='__main__':
     #sandhilllazygal quilt
     #SandyHillQuilt(800, lipstick, sandyhilllazygalquilt_list)
 
+    getscreen().getcanvas().postscript(file="bluesquilt.eps")
     exitonclick() #comment this out if you want quilt to close automatically
