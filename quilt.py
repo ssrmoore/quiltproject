@@ -169,5 +169,5 @@ if __name__=='__main__':
     #sandhilllazygal quilt
     #SandyHillQuilt(800, lipstick, sandyhilllazygalquilt_list)
 
-    getscreen().getcanvas().postscript(file="bluesquilt.eps")
+    #getscreen().getcanvas().postscript(file="bluesquilt.eps")
     exitonclick() #comment this out if you want quilt to close automatically
